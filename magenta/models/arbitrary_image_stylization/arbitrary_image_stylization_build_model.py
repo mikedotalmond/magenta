@@ -200,7 +200,7 @@ def _inception_v3_arg_scope(is_training=True,
   Args:
     is_training: Whether or not we're training the model.
     weight_decay: The weight decay to use for regularizing the model.
-    stddev: The standard deviation of the trunctated normal weight initializer.
+    stddev: The standard deviation of the truncated normal weight initializer.
     batch_norm_var_collection: The name of the collection for the batch norm
       variables.
 
