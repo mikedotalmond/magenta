@@ -9,3 +9,5 @@ build/
 *.DS_Store
 .vscode/*
 .idea/
+/magenta/models/arbitrary_image_stylization/output
+/magenta/models/arbitrary_image_stylization/model
