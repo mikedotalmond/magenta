@@ -20,7 +20,10 @@ import tempfile
 
 from magenta.models.image_stylization import imagenet_data
 import numpy as np
-import skimage.io
+
+# import skimage.io
+import matplotlib.pylab as plt
+
 import tensorflow.compat.v1 as tf
 
 
@@ -392,14 +395,15 @@ def load_np_image_uint8(image_file):
     A 3-D numpy array of shape [image_size, image_size, 3] and dtype uint8,
     with values in [0, 255].
   """
-  with tempfile.NamedTemporaryFile() as f:
-    f.write(tf.gfile.GFile(image_file, 'rb').read())
-    f.flush()
-    image = skimage.io.imread(f.name)
+  image = plt.imread(image_file)
+  # with tempfile.NamedTemporaryFile() as f:
+    # f.write(tf.gfile.GFile(image_file, 'rb').read())
+    # f.flush()
+    # image = skimage.io.imread(f.name)
     # Workaround for black-and-white images
-    if image.ndim == 2:
-      image = np.tile(image[:, :, None], (1, 1, 3))
-    return image
+    # if image.ndim == 2:
+    #   image = np.tile(image[:, :, None], (1, 1, 3))
+  return image
 
 
 def save_np_image(image, output_file, save_format='jpeg'):
@@ -413,7 +417,10 @@ def save_np_image(image, output_file, save_format='jpeg'):
   """
   image = np.uint8(image * 255.0)
   buf = io.BytesIO()
-  skimage.io.imsave(buf, np.squeeze(image, 0), format=save_format)
+  
+  # skimage.io.imsave(buf, np.squeeze(image, 0), format=save_format)
+  plt.imsave(buf, np.squeeze(image, 0), format=save_format)
+
   buf.seek(0)
   f = tf.gfile.GFile(output_file, 'w')
   f.write(buf.getvalue())
